@@ -1,5 +1,6 @@
 function suma(a,b){
-    return a + b;
+  // ERROR INTENCIONAL: Suma uno de más. Esto hará que el test falle (2+3=6, en lugar de 5)
+  return a + b + 1; 
 }
 
 function resta(a,b){
