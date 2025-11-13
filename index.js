@@ -10,17 +10,19 @@ app.get('/', (req, res) => {
     
     let mensaje = '¡Hola desde Render y GitHub Actions! 🎉';
     
-    // 2. Usar las funciones para demostrar la lógica del CI/CD
+    // Ejecuta operaciones de prueba que NO fallan
     try {
         const resultadoSuma = suma(10, 25);
+        const resultadoDivision = divide(50, 5); // <--- Usa una división válida aquí
         
-        // Simulación de una operación de error que tu código maneja
-        divide(5, 0); 
+        // NO LLAMAMOS a divide(5, 0)
         
         mensaje += `\nResultado de la suma (10+25): ${resultadoSuma}`;
+        mensaje += `\nResultado de la división (50/5): ${resultadoDivision}`; // Agregamos la división válida
         
     } catch (error) {
-        mensaje += `\nError controlado: ${error.message}`;
+        // Mantenemos el catch por si hay un error inesperado, pero es poco probable que se ejecute ahora.
+        mensaje += `\nError Inesperado en el servidor: ${error.message}`; 
     }
     
     res.type('text/plain').send(mensaje);
