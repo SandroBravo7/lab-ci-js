@@ -8,7 +8,7 @@ const { suma, divide } = require('./math');
 // Endpoint principal
 app.get('/', (req, res) => {
     
-    let mensaje = '¡Hola desde Render y GitHub Actions! 🎉';
+    let mensaje = '¡Hola Sandro, desde Render y GitHub Actions! 🎉';
     
     // Ejecuta operaciones de prueba que NO fallan
     try {
