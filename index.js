@@ -1,21 +1,33 @@
-// 1. Importa las funciones de tu módulo math.js
-const { suma, resta, multiplica, divide } = require('./math');
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-console.log('--- Aplicación Node.js de CI/CD Iniciada ---');
+// 1. Importar tus funciones matemáticas
+const { suma, divide } = require('./math');
 
-// 2. Realiza y muestra algunas operaciones
-try {
-    console.log(`Suma (10 + 5): ${suma(10, 5)}`);
-    console.log(`Resta (20 - 7): ${resta(20, 7)}`);
-    console.log(`Multiplicación (4 * 3): ${multiplica(4, 3)}`);
-    console.log(`División (50 / 10): ${divide(50, 10)}`);
+// Endpoint principal
+app.get('/', (req, res) => {
     
-    // 3. Prueba la función de manejo de errores
-    console.log('Probando división por cero...');
-    divide(10, 0); // Esto lanzará un error y pasará al catch
+    let mensaje = '¡Hola desde Render y GitHub Actions! 🎉';
     
-} catch (error) {
-    console.error(`ERROR: ${error.message}`);
-}
+    // 2. Usar las funciones para demostrar la lógica del CI/CD
+    try {
+        const resultadoSuma = suma(10, 25);
+        
+        // Simulación de una operación de error que tu código maneja
+        divide(5, 0); 
+        
+        mensaje += `\nResultado de la suma (10+25): ${resultadoSuma}`;
+        
+    } catch (error) {
+        mensaje += `\nError controlado: ${error.message}`;
+    }
+    
+    res.type('text/plain').send(mensaje);
+});
 
-console.log('--- Aplicación terminada. ---');
+// Iniciar el servidor
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en puerto ${PORT}`);
+    console.log(`Your service is live en http://localhost:${PORT}`);
+});
